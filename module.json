@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "id": "privacy-protection",
+  "version": "1.0.2",
+  "minCoreVersion": "0.4.6",
+  "title": "Privacy Protection",
+  "description": "Known LG ACR, voice, telemetry/ad and discovery service blockers, with a local protection log.",
+  "disableDescription": "Removes this module's temporary service blocks, allowing those LG services to run again. Saved preferences and logs are retained. Microphone Protection depends on this module and must be turned off first.",
+  "publisher": "Unknown Digital and Unknown Suite contributors",
+  "license": "MIT",
+  "requiresRoot": true,
+  "entry": "module.js",
+  "permissions": [
+    "Runs as root; declarations are not a sandbox",
+    "Mounts reversible RAM overlays on a fixed list of optional LG executables; stops those exact services",
+    "Uses retained privacy settings in /var/lib/unknown-home/privacy; no firmware flashing"
+  ],
+  "actions": {
+    "status": {
+      "title": "View current status",
+      "description": "Shows which protections are requested, which known LG services are actually blocked, and any unsupported targets or verification failures.",
+      "readOnly": true,
+      "parameters": {}
+    },
+    "health": {
+      "title": "Check module health",
+      "description": "Checks that each requested known-service block is verified. It does not prove that all tracking, app traffic or advertising domains are blocked.",
+      "readOnly": true,
+      "parameters": {}
+    },
+    "maintenance": {
+      "title": "Reapply saved settings",
+      "description": "Checks the protection choices saved on this TV and reapplies their temporary blocks if needed, such as after a restart. It does not turn on protections saved as OFF.",
+      "readOnly": false,
+      "parameters": {}
+    },
+    "setProtection": {
+      "title": "Apply protection setting",
+      "readOnly": false,
+      "parameters": {
+        "control": {
+          "type": "string",
+          "title": "Protection to change",
+          "enum": [
+            "acr",
+            "voice",
+            "telemetry",
+            "discovery",
+            "logging"
+          ],
+          "enumLabels": {
+            "acr": "Content recognition (ACR)",
+            "voice": "LG voice services",
+            "telemetry": "LG advertising and telemetry",
+            "discovery": "LG network discovery",
+            "logging": "Protection event logging"
+          },
+          "enumDescriptions": {
+            "acr": "Blocks known automatic content-recognition services that identify what is playing. Analytics inside YouTube or other apps are not controlled by this option.",
+            "voice": "Blocks known LG voice-input services, including the normal remote voice path. Voice search and commands may stop working. Device-level capture blocking is a separate module.",
+            "telemetry": "Blocks recognized LG advertising and telemetry service executables. This is not a firewall and does not block every LG or Alphonso domain.",
+            "discovery": "Blocks known LG services that discover nearby network devices. Automatic device discovery may stop working; independent scans by every app are not blocked.",
+            "logging": "ON records protection changes and verification events locally for View protection log. OFF stops adding entries without clearing existing ones."
+          }
+        },
+        "enabled": {
+          "type": "boolean",
+          "title": "Requested state for this option",
+          "description": "ON enables the selected block or event logging. OFF disables only that option; other protection settings stay unchanged.",
+          "currentValue": {
+            "selector": "control",
+            "paths": {
+              "acr": [
+                "controls",
+                "acr",
+                "enabled"
+              ],
+              "voice": [
+                "controls",
+                "voice",
+                "enabled"
+              ],
+              "telemetry": [
+                "controls",
+                "telemetry",
+                "enabled"
+              ],
+              "discovery": [
+                "controls",
+                "discovery",
+                "enabled"
+              ],
+              "logging": [
+                "logging"
+              ]
+            }
+          }
+        }
+      },
+      "description": "Changes only the selected protection. ON blocks its known LG services; OFF removes that block. The logging option records events instead of blocking a service."
+    },
+    "viewLog": {
+      "title": "View protection log",
+      "readOnly": true,
+      "parameters": {},
+      "description": "Displays locally recorded protection activity and errors. This is not a complete history of network traffic."
+    },
+    "clearLog": {
+      "title": "Clear protection log",
+      "readOnly": false,
+      "parameters": {},
+      "description": "Deletes stored protection-log entries. It does not change protections or stop future logging when logging is on.",
+      "confirmation": {
+        "message": "Confirm deleting the stored log entries. This cannot be undone."
+      }
+    }
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "id": "privacy-protection",
+  "version": "1.0.2",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "572234ff94a780da9248b867a9c6d208b18b702864d847e1cb4a42bfc1b560f3",
+      "bytes": 51
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "351ba46fc3dfe9e631667f04fb7da305b8605bb1974d09f2a811e92239b856d2",
+      "bytes": 32
+    },
+    {
+      "path": "Build.cmd",
+      "sha256": "3e66bb628af029a43d740f9ab5c4553e5ec2e80b59aece1e4b2b41d1a86049a3",
+      "bytes": 255
+    },
+    {
+      "path": "Build.ps1",
+      "sha256": "e26686fca8abc6b28b6aa79e922e610ac6087dd36f3c8c36683082c83beebf55",
+      "bytes": 1656
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "ed18054c1e42887a48a91b06aceb534235e77bb6d756a0776384d361cff0dac2",
+      "bytes": 1103
+    },
+    {
+      "path": "MODULE.md",
+      "sha256": "4ecf1cfd28943a0b377abacde815dce0ac9b83f3f544513edea4bcd276ddca0e",
+      "bytes": 2005
+    },
+    {
+      "path": "OWNER_USE.md",
+      "sha256": "998f709fec86aeccc2d2eefb72d1cd161b09bfea67557dd24d3429dac10fd7b6",
+      "bytes": 1297
+    },
+    {
+      "path": "README.md",
+      "sha256": "a2f21f25878b77b26bd341a5541407818e64d31e75db9f7c9f540045ed13529d",
+      "bytes": 2929
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "a3e328ecf9269462d8df8c45d30d4934c184bdd14faf93c04446478946962532",
+      "bytes": 1024
+    },
+    {
+      "path": "SHA256SUMS.txt",
+      "sha256": "ee83cf568629418480ecc4e07c81a078dc371b7b4900f7cb9f6e272911afa60a",
+      "bytes": 95
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "53c653b665d4a2071d673883d81628a452989c49f0681cdca108fcb9992458ac",
+      "bytes": 482
+    },
+    {
+      "path": "build-config.json",
+      "sha256": "c6e651a85840f5c886d00f299abf08d8aabe7cd566a5f395feeb4428661947f0",
+      "bytes": 922
+    },
+    {
+      "path": "build.js",
+      "sha256": "608d61aaec5b0e23b66538b373afd7dfad68f40693ec015439d22e003576fc0d",
+      "bytes": 3848
+    },
+    {
+      "path": "module-archive.js",
+      "sha256": "07a177a6367921e7c71e5909735712c9e00b26e8f50d20955680e7ddcbfbed09",
+      "bytes": 14682
+    },
+    {
+      "path": "module-support.js",
+      "sha256": "61a3ce4965b535df79f0ff4ce0d0bcd76a88c7cc38fdb9f5c5c4385bacfd06d9",
+      "bytes": 3244
+    },
+    {
+      "path": "module.js",
+      "sha256": "9be7dc7cc21400a342cab9cc41966b32c1a8cf7bbcdfe477f69c00cfcf858ea2",
+      "bytes": 1960
+    },
+    {
+      "path": "module.json",
+      "sha256": "ec850b139f50a25971048ed59f0c19c5c8d062d6a3dd379d07f714f573c435e7",
+      "bytes": 5105
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "3916817d39926a1a7d9392ce42eaac70acda7c588dc14cca5b8b3123c9cf6df9",
+      "bytes": 2235
+    },
+    {
+      "path": "package.json",
+      "sha256": "eb0e13ce27c71dffb3634ad31edf0eb219c01dd3e7dbaa24873bd83ca8ff830f",
+      "bytes": 444
+    },
+    {
+      "path": "privacy-protection-1.0.2.zip",
+      "sha256": "00f2642b692fb299a7c20e09af9ecb4240816d34dd9b7a055e0ecec171498f5a",
+      "bytes": 15246
+    },
+    {
+      "path": "runtime/unknown-home-network-audit.js",
+      "sha256": "ff6b0c074fe3aed41b16737ecb8912587989cc137757417dcd161873d122802c",
+      "bytes": 7797
+    },
+    {
+      "path": "runtime/unknown-home-privacy.js",
+      "sha256": "f35cf660dcb2a76f8a3719d19b23a61d15f71f17ce71912303a3fb4629080588",
+      "bytes": 17581
+    }
+  ]
+}
