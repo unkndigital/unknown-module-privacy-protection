@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "id": "privacy-protection",
-  "version": "1.0.2",
-  "minCoreVersion": "0.4.6",
+  "version": "1.1.0",
+  "minCoreVersion": "0.8.0",
   "title": "Privacy Protection",
   "description": "Known LG ACR, voice, telemetry/ad and discovery service blockers, with a local protection log.",
   "disableDescription": "Removes this module's temporary service blocks, allowing those LG services to run again. Saved preferences and logs are retained. Microphone Protection depends on this module and must be turned off first.",
@@ -114,5 +114,6 @@
         "message": "Confirm deleting the stored log entries. This cannot be undone."
       }
     }
-  }
+  },
+  "updateStrategy": "enable"
 }
