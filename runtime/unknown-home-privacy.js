@@ -119,14 +119,18 @@ function createEngine(options) {
     const result = [];
     io.readdirSync(resolve("/proc")).filter((entry) => /^[1-9][0-9]*$/.test(entry)).forEach((pid) => {
       try {
-        const executable = io.readlinkSync(resolve("/proc/" + pid + "/exe")).replace(/ \(deleted\)$/, "");
+        let executable;
+        for(let attempt=0;attempt<3;attempt++){
+          try{executable=io.readlinkSync(resolve("/proc/"+pid+"/exe")).replace(/ \(deleted\)$/,"");break;}
+          catch(error){if(attempt===2||!["EACCES","EPERM"].includes(error.code))throw error;}
+        }
         if (executable.startsWith("/usr/sbin/") && ALLOWED.has(path.basename(executable))) {
           const info = stat("/proc/" + pid + "/exe");
           result.push({ pid: Number(pid), name: path.basename(executable), dev: info.dev, ino: info.ino });
         }
       } catch (error) {
         // A disappearing process is normal; a denied inventory cannot establish protection.
-        if (!["ENOENT", "ESRCH", "EINVAL"].includes(error.code)) throw new Error("Process inventory could not be verified");
+        if (!["ENOENT", "ESRCH", "EINVAL"].includes(error.code)) {const problem=new Error("Process inventory could not be verified: PID "+pid+" ("+(error.code||"unknown error")+")");problem.code="PROTECTION_UNVERIFIED";throw problem;}
       }
     });
     return result;
@@ -205,6 +209,8 @@ function createEngine(options) {
       if (processes().some((item) => names.includes(item.name))) wait();
       if (processes().some((item) => names.includes(item.name))) throw new Error("A protected service did not stop; change rolled back");
     } catch (error) {
+      // An unreadable process is uncertainty, not permission to remove working blocks.
+      if(error.code==="PROTECTION_UNVERIFIED")throw error;
       const errors = [];
       added.reverse().forEach((name) => { try { remove(name, state); } catch (rollback) { errors.push(rollback.message); } });
       if (errors.length) throw new Error(error.message + "; rollback incomplete: " + errors.join(", "));
@@ -270,7 +276,7 @@ function createEngine(options) {
         try {
           if (desired[key]) enable(key, state);
           else PROFILES[key].required.concat(PROFILES[key].optional).forEach((name) => remove(name, state));
-        } catch (error) { errors.push({ control: key, error: error.message }); }
+        } catch (error) { errors.push({ control: key, error: error.message, code:error.code }); }
       });
       const result = status();
       result.errors = errors;
@@ -302,7 +308,7 @@ function createEngine(options) {
     return result;
   }); }
   function logs(clear) { return lock(() => { if (clear) write(BASE + "/events.json", []); return { events: json(BASE + "/events.json", []).slice(-128).reverse() }; }); }
-  return { change: change, reconcile: reconcile, status: status, inspect: inspect, logs: logs, preflight: preflight, networkAudit: networkAudit };
+  return { change: change, reconcile: reconcile, status: status, settings:config, inspect: inspect, logs: logs, preflight: preflight, networkAudit: networkAudit };
 }
 
 if (require.main === module) {

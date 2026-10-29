@@ -19,5 +19,5 @@ function create(id,options){
   }
   return {id,data,base,read,write,state,save,suspend,claim,run,exists:fs.existsSync};
 }
-function main(createModule){if(process.platform!=="linux"||typeof process.getuid!=="function"||process.getuid()!==0){process.stderr.write("Owner-controlled unjailed root TV required\n");process.exitCode=1;return;}Promise.resolve().then(()=>createModule().run(process.argv[2]||"status",JSON.parse(process.argv[3]||"{}"))).then(result=>process.stdout.write(JSON.stringify(Object.assign({returnValue:true},result))+"\n")).catch(e=>{process.stdout.write(JSON.stringify({returnValue:false,errorText:e.message})+"\n");process.exitCode=1;});}
+function main(createModule){if(process.platform!=="linux"||typeof process.getuid!=="function"||process.getuid()!==0){process.stderr.write("Owner-controlled unjailed root TV required\n");process.exitCode=1;return;}Promise.resolve().then(()=>createModule().run(process.argv[2]||"status",JSON.parse(process.argv[3]||"{}"))).then(result=>process.stdout.write(JSON.stringify(Object.assign({returnValue:true},result))+"\n")).catch(e=>{process.stdout.write(JSON.stringify({returnValue:false,errorText:e.message,errorCode:e.code==="PROTECTION_UNVERIFIED"?e.code:undefined})+"\n");process.exitCode=1;});}
 module.exports={create,main};

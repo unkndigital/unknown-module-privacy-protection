@@ -1,7 +1,7 @@
 {
   "id": "privacy-protection",
-  "version": "1.1.0",
-  "coreVersion": "0.8.0",
+  "version": "1.1.1",
+  "coreVersion": "0.8.3",
   "home": false,
   "inputs": [
     {
